@@ -779,20 +779,28 @@ p {
   }
 }
 
-/* Mobile navigation */
+/* Mobile */
 
 @media (max-width: 760px) {
   html {
-    scroll-padding-top: 86px;
+    scroll-padding-top: 74px;
+  }
+
+  body {
+    padding-bottom: 78px;
   }
 
   .container {
     width: min(100% - 28px, var(--container));
   }
 
+  .site-header {
+    position: sticky;
+  }
+
   .header-inner {
     position: relative;
-    min-height: 76px;
+    min-height: 74px;
     padding: 12px 0;
     display: flex;
     align-items: center;
@@ -801,7 +809,7 @@ p {
   }
 
   .site-logo-image {
-    width: 172px;
+    width: 170px;
   }
 
   .mobile-nav-toggle {
@@ -812,7 +820,7 @@ p {
     justify-content: center;
     flex-direction: column;
     gap: 5px;
-    border: 1px solid rgba(212, 168, 87, 0.22);
+    border: 1px solid rgba(212, 168, 87, 0.24);
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.06);
     cursor: pointer;
@@ -840,12 +848,13 @@ p {
 
   .header-right {
     position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
-    top: 100%;
     display: none;
     padding: 14px;
-    border-top: 1px solid rgba(212, 168, 87, 0.12);
+    border-top: 1px solid rgba(212, 168, 87, 0.14);
+    border-bottom: 1px solid rgba(212, 168, 87, 0.14);
     background: rgba(15, 12, 10, 0.98);
     box-shadow: 0 22px 50px rgba(0, 0, 0, 0.28);
   }
@@ -856,6 +865,7 @@ p {
 
   .site-nav {
     display: grid;
+    width: 100%;
     gap: 8px;
     margin-bottom: 12px;
   }
@@ -863,6 +873,7 @@ p {
   .site-nav a {
     display: block;
     padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.06);
     color: rgba(255, 255, 255, 0.9);
@@ -870,15 +881,18 @@ p {
     font-weight: 850;
   }
 
+  .site-nav a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
   .header-button {
     width: 100%;
     min-height: 48px;
+    padding: 0 24px;
+    font-size: 0.92rem;
   }
-}
 
-/* Mobile layout */
-
-@media (max-width: 760px) {
   .hero {
     min-height: auto;
   }
@@ -1036,10 +1050,6 @@ p {
     box-shadow: 0 18px 44px rgba(31, 26, 22, 0.28);
   }
 
-  body {
-    padding-bottom: 78px;
-  }
-
   .site-footer {
     padding: 58px 0 88px;
   }
@@ -1057,7 +1067,7 @@ p {
   }
 
   .site-logo-image {
-    width: 164px;
+    width: 160px;
   }
 
   .hero-inner {

@@ -53,7 +53,7 @@
     navToggle.addEventListener("click", () => {
       const isOpen = headerRight.classList.toggle("is-open");
       navToggle.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      navToggle.setAttribute("aria-expanded", isOpen);
     });
 
     document.querySelectorAll(".site-nav a").forEach((link) => {
