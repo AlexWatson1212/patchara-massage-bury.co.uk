@@ -14,6 +14,17 @@
       >
     </a>
 
+    <button
+      class="mobile-nav-toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <div class="header-right">
 
       <nav class="site-nav" aria-label="Main navigation">
@@ -33,3 +44,24 @@
   </div>
 
 </header>
+
+<script>
+  const navToggle = document.querySelector(".mobile-nav-toggle");
+  const headerRight = document.querySelector(".header-right");
+
+  if (navToggle && headerRight) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = headerRight.classList.toggle("is-open");
+      navToggle.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    document.querySelectorAll(".site-nav a").forEach((link) => {
+      link.addEventListener("click", () => {
+        headerRight.classList.remove("is-open");
+        navToggle.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+</script>
