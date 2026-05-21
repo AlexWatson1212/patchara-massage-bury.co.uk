@@ -61,7 +61,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(255, 250, 243, 0.94);
+  background: rgba(255, 250, 243, 0.95);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(31, 26, 22, 0.08);
 }
@@ -75,9 +75,10 @@ a {
 }
 
 .site-logo {
-  font-size: 1.05rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
+  color: var(--text);
+  font-size: 1.08rem;
+  font-weight: 950;
+  letter-spacing: -0.025em;
 }
 
 .site-nav {
@@ -110,7 +111,7 @@ a {
   margin: 0 0 16px;
   color: var(--gold-dark);
   font-size: 0.76rem;
-  font-weight: 900;
+  font-weight: 950;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
@@ -127,19 +128,19 @@ p {
 }
 
 h1 {
-  max-width: 770px;
+  max-width: 800px;
   margin-bottom: 24px;
   color: #fff;
-  font-size: clamp(3.5rem, 6.6vw, 6.8rem);
-  line-height: 0.93;
+  font-size: clamp(3.35rem, 6.3vw, 6.5rem);
+  line-height: 0.94;
   letter-spacing: -0.08em;
   text-wrap: balance;
 }
 
 h2 {
   margin-bottom: 20px;
-  font-size: clamp(2.35rem, 4.3vw, 4rem);
-  line-height: 1;
+  font-size: clamp(2.3rem, 4vw, 3.8rem);
+  line-height: 1.02;
   letter-spacing: -0.07em;
   text-wrap: balance;
 }
@@ -216,14 +217,14 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.72) contrast(1.05) saturate(0.95);
+  filter: brightness(0.74) contrast(1.04) saturate(0.95);
   transform: scale(1.02);
 }
 
 .hero-shade {
   background:
-    linear-gradient(90deg, rgba(29, 25, 21, 0.78) 0%, rgba(29, 25, 21, 0.52) 42%, rgba(29, 25, 21, 0.3) 100%),
-    linear-gradient(0deg, rgba(29, 25, 21, 0.55), rgba(29, 25, 21, 0.08) 52%);
+    linear-gradient(90deg, rgba(29, 25, 21, 0.8) 0%, rgba(29, 25, 21, 0.56) 45%, rgba(29, 25, 21, 0.28) 100%),
+    linear-gradient(0deg, rgba(29, 25, 21, 0.58), rgba(29, 25, 21, 0.08) 52%);
 }
 
 .hero-inner {
@@ -233,7 +234,7 @@ p {
 }
 
 .hero-text {
-  max-width: 620px;
+  max-width: 640px;
   margin-bottom: 0;
   color: rgba(255, 255, 255, 0.84);
   font-size: clamp(1.1rem, 1.5vw, 1.28rem);
@@ -279,6 +280,7 @@ p {
 .prices-grid,
 .about-grid,
 .shop-grid,
+.body-scrub-grid,
 .contact-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -289,6 +291,25 @@ p {
 .intro-grid > p {
   max-width: 620px;
   font-size: 1.12rem;
+}
+
+.gallery-strip-section {
+  padding: 38px 0;
+  background: var(--dark);
+}
+
+.gallery-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+
+.gallery-strip img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.24);
 }
 
 .treatments-section {
@@ -315,7 +336,7 @@ p {
   padding: 30px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(255, 250, 243, 0.86);
+  background: rgba(255, 250, 243, 0.88);
   box-shadow: var(--shadow-soft);
   transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
@@ -384,7 +405,8 @@ p {
   background: var(--bg-soft);
 }
 
-.about-image {
+.about-image,
+.body-scrub-image {
   height: 520px;
   overflow: hidden;
   border-radius: calc(var(--radius) + 8px);
@@ -392,7 +414,8 @@ p {
   box-shadow: var(--shadow);
 }
 
-.about-image img {
+.about-image img,
+.body-scrub-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -402,11 +425,34 @@ p {
   background: var(--bg);
 }
 
+.shop-front-card {
+  overflow: hidden;
+  border-radius: calc(var(--radius) + 6px);
+  background: var(--bg-soft);
+  box-shadow: var(--shadow);
+}
+
+.shop-front-card > img {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+}
+
+.shop-card {
+  border-radius: 0;
+  box-shadow: none;
+  border: 0;
+}
+
 .shop-card a {
   display: inline-flex;
   margin-top: 8px;
   color: var(--gold-dark);
   font-weight: 950;
+}
+
+.body-scrub-section {
+  background: var(--bg-muted);
 }
 
 .reviews-section {
@@ -462,13 +508,15 @@ p {
   .prices-grid,
   .about-grid,
   .shop-grid,
+  .body-scrub-grid,
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 42px;
   }
 
   .card-grid,
-  .review-grid {
+  .review-grid,
+  .gallery-strip {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -514,12 +562,18 @@ p {
   }
 
   .card-grid,
-  .review-grid {
+  .review-grid,
+  .gallery-strip {
     grid-template-columns: 1fr;
   }
 
-  .about-image {
+  .about-image,
+  .body-scrub-image {
     height: 380px;
+  }
+
+  .gallery-strip img {
+    height: 260px;
   }
 }
 
@@ -550,5 +604,9 @@ p {
   .contact-card,
   .shop-card {
     padding: 26px;
+  }
+
+  .shop-front-card > img {
+    height: 240px;
   }
 }
