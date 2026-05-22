@@ -1,3 +1,5 @@
+<!-- _includes/header.html -->
+
 <header class="site-header">
 
   <div class="container header-inner">
@@ -17,7 +19,7 @@
     <button
       class="mobile-nav-toggle"
       type="button"
-      aria-label="Open navigation"
+      aria-label="Toggle navigation"
       aria-expanded="false"
     >
       <span></span>
@@ -25,12 +27,14 @@
       <span></span>
     </button>
 
+    <div class="mobile-nav-overlay"></div>
+
     <div class="header-right">
 
       <nav class="site-nav" aria-label="Main navigation">
+        <a href="#about">Welcome</a>
         <a href="#treatments">Treatments</a>
         <a href="#prices">Prices</a>
-        <a href="#about">About</a>
         <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -48,20 +52,46 @@
 <script>
   const navToggle = document.querySelector(".mobile-nav-toggle");
   const headerRight = document.querySelector(".header-right");
+  const navOverlay = document.querySelector(".mobile-nav-overlay");
 
   if (navToggle && headerRight) {
+
+    function closeMenu() {
+      headerRight.classList.remove("is-open");
+      navToggle.classList.remove("is-open");
+      navOverlay.classList.remove("is-visible");
+      document.body.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function openMenu() {
+      headerRight.classList.add("is-open");
+      navToggle.classList.add("is-open");
+      navOverlay.classList.add("is-visible");
+      document.body.classList.add("nav-open");
+      navToggle.setAttribute("aria-expanded", "true");
+    }
+
     navToggle.addEventListener("click", () => {
-      const isOpen = headerRight.classList.toggle("is-open");
-      navToggle.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", isOpen);
+      const isOpen = headerRight.classList.contains("is-open");
+
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
+    navOverlay.addEventListener("click", closeMenu);
+
     document.querySelectorAll(".site-nav a").forEach((link) => {
-      link.addEventListener("click", () => {
-        headerRight.classList.remove("is-open");
-        navToggle.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
+      link.addEventListener("click", closeMenu);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 760) {
+        closeMenu();
+      }
     });
   }
 </script>
