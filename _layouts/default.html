@@ -11,52 +11,5 @@
 
     {% include footer.html %}
 
-<script>
-  (() => {
-    const navToggle = document.querySelector(".mobile-nav-toggle");
-    const headerRight = document.querySelector(".header-right");
-    const navOverlay = document.querySelector(".mobile-nav-overlay");
-    const navClose = document.querySelector(".mobile-menu-close");
-
-    if (!navToggle || !headerRight || !navOverlay) return;
-
-    const openMenu = () => {
-      document.body.classList.add("nav-open");
-      navToggle.classList.add("is-open");
-      headerRight.classList.add("is-open");
-      navOverlay.classList.add("is-visible");
-      navToggle.setAttribute("aria-expanded", "true");
-      headerRight.setAttribute("aria-hidden", "false");
-    };
-
-    const closeMenu = () => {
-      document.body.classList.remove("nav-open");
-      navToggle.classList.remove("is-open");
-      headerRight.classList.remove("is-open");
-      navOverlay.classList.remove("is-visible");
-      navToggle.setAttribute("aria-expanded", "false");
-      headerRight.setAttribute("aria-hidden", "true");
-    };
-
-    navToggle.addEventListener("click", () => {
-      document.body.classList.contains("nav-open") ? closeMenu() : openMenu();
-    });
-
-    navOverlay.addEventListener("click", closeMenu);
-
-    if (navClose) {
-      navClose.addEventListener("click", closeMenu);
-    }
-
-    document.querySelectorAll(".site-nav a, .header-button, .mobile-menu-phone").forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeMenu();
-    });
-  })();
-</script>
-
   </body>
 </html>
