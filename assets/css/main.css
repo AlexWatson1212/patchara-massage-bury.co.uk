@@ -1547,3 +1547,22 @@ p {
     font-size: 1rem;
   }
 }
+@media (max-width: 760px) {
+  body.nav-open .header-right {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    display: flex !important;
+    pointer-events: auto !important;
+  }
+
+  body.nav-open .mobile-nav-overlay {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .header-right {
+    pointer-events: none;
+  }
+}

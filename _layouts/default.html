@@ -11,7 +11,7 @@
 
     {% include footer.html %}
 
-    <script>
+<script>
   (() => {
     const navToggle = document.querySelector(".mobile-nav-toggle");
     const headerRight = document.querySelector(".header-right");
@@ -20,28 +20,26 @@
 
     if (!navToggle || !headerRight || !navOverlay) return;
 
-    function closeMenu() {
-      headerRight.classList.remove("is-open");
-      navToggle.classList.remove("is-open");
-      navOverlay.classList.remove("is-visible");
-      document.body.classList.remove("nav-open");
-      navToggle.setAttribute("aria-expanded", "false");
-      navToggle.setAttribute("aria-label", "Open navigation");
-      headerRight.setAttribute("aria-hidden", "true");
-    }
-
-    function openMenu() {
-      headerRight.classList.add("is-open");
-      navToggle.classList.add("is-open");
-      navOverlay.classList.add("is-visible");
+    const openMenu = () => {
       document.body.classList.add("nav-open");
+      navToggle.classList.add("is-open");
+      headerRight.classList.add("is-open");
+      navOverlay.classList.add("is-visible");
       navToggle.setAttribute("aria-expanded", "true");
-      navToggle.setAttribute("aria-label", "Close navigation");
       headerRight.setAttribute("aria-hidden", "false");
-    }
+    };
+
+    const closeMenu = () => {
+      document.body.classList.remove("nav-open");
+      navToggle.classList.remove("is-open");
+      headerRight.classList.remove("is-open");
+      navOverlay.classList.remove("is-visible");
+      navToggle.setAttribute("aria-expanded", "false");
+      headerRight.setAttribute("aria-hidden", "true");
+    };
 
     navToggle.addEventListener("click", () => {
-      headerRight.classList.contains("is-open") ? closeMenu() : openMenu();
+      document.body.classList.contains("nav-open") ? closeMenu() : openMenu();
     });
 
     navOverlay.addEventListener("click", closeMenu);
@@ -56,10 +54,6 @@
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeMenu();
-    });
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 760) closeMenu();
     });
   })();
 </script>
