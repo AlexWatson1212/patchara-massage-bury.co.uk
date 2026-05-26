@@ -12,54 +12,57 @@
     {% include footer.html %}
 
     <script>
-      const navToggle = document.querySelector(".mobile-nav-toggle");
-      const headerRight = document.querySelector(".header-right");
-      const navOverlay = document.querySelector(".mobile-nav-overlay");
-      const navClose = document.querySelector(".mobile-menu-close");
+  (() => {
+    const navToggle = document.querySelector(".mobile-nav-toggle");
+    const headerRight = document.querySelector(".header-right");
+    const navOverlay = document.querySelector(".mobile-nav-overlay");
+    const navClose = document.querySelector(".mobile-menu-close");
 
-      if (navToggle && headerRight && navOverlay) {
-        function closeMenu() {
-          headerRight.classList.remove("is-open");
-          navToggle.classList.remove("is-open");
-          navOverlay.classList.remove("is-visible");
-          document.body.classList.remove("nav-open");
-          navToggle.setAttribute("aria-expanded", "false");
-          navToggle.setAttribute("aria-label", "Open navigation");
-          headerRight.setAttribute("aria-hidden", "true");
-        }
+    if (!navToggle || !headerRight || !navOverlay) return;
 
-        function openMenu() {
-          headerRight.classList.add("is-open");
-          navToggle.classList.add("is-open");
-          navOverlay.classList.add("is-visible");
-          document.body.classList.add("nav-open");
-          navToggle.setAttribute("aria-expanded", "true");
-          navToggle.setAttribute("aria-label", "Close navigation");
-          headerRight.setAttribute("aria-hidden", "false");
-        }
+    function closeMenu() {
+      headerRight.classList.remove("is-open");
+      navToggle.classList.remove("is-open");
+      navOverlay.classList.remove("is-visible");
+      document.body.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open navigation");
+      headerRight.setAttribute("aria-hidden", "true");
+    }
 
-        navToggle.addEventListener("click", () => {
-          headerRight.classList.contains("is-open") ? closeMenu() : openMenu();
-        });
+    function openMenu() {
+      headerRight.classList.add("is-open");
+      navToggle.classList.add("is-open");
+      navOverlay.classList.add("is-visible");
+      document.body.classList.add("nav-open");
+      navToggle.setAttribute("aria-expanded", "true");
+      navToggle.setAttribute("aria-label", "Close navigation");
+      headerRight.setAttribute("aria-hidden", "false");
+    }
 
-        navOverlay.addEventListener("click", closeMenu);
+    navToggle.addEventListener("click", () => {
+      headerRight.classList.contains("is-open") ? closeMenu() : openMenu();
+    });
 
-        if (navClose) {
-          navClose.addEventListener("click", closeMenu);
-        }
+    navOverlay.addEventListener("click", closeMenu);
 
-        document.querySelectorAll(".site-nav a, .header-button, .mobile-menu-phone").forEach((link) => {
-          link.addEventListener("click", closeMenu);
-        });
+    if (navClose) {
+      navClose.addEventListener("click", closeMenu);
+    }
 
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") closeMenu();
-        });
+    document.querySelectorAll(".site-nav a, .header-button, .mobile-menu-phone").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
 
-        window.addEventListener("resize", () => {
-          if (window.innerWidth > 760) closeMenu();
-        });
-      }
-    </script>
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 760) closeMenu();
+    });
+  })();
+</script>
+
   </body>
 </html>
