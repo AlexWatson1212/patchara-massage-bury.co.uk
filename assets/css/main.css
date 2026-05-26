@@ -1566,3 +1566,29 @@ p {
     pointer-events: none;
   }
 }
+@media (max-width: 760px) {
+  body.nav-open .mobile-nav-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  body.nav-open .mobile-nav-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  body.nav-open .mobile-nav-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  body.nav-open .header-right {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+
+  body.nav-open .mobile-nav-overlay {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}

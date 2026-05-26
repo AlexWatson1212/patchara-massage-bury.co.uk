@@ -11,15 +11,23 @@
       >
     </a>
 
-    <button class="mobile-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+    <button
+      class="mobile-nav-toggle"
+      type="button"
+      aria-label="Open navigation"
+      onclick="document.body.classList.toggle('nav-open')"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <div class="mobile-nav-overlay" aria-hidden="true"></div>
+    <div
+      class="mobile-nav-overlay"
+      onclick="document.body.classList.remove('nav-open')"
+    ></div>
 
-    <div class="header-right" aria-hidden="true">
+    <div class="header-right">
       <div class="mobile-menu-head">
         <img
           src="{{ '/assets/images/logo.png' | relative_url }}"
@@ -27,17 +35,22 @@
           class="mobile-menu-logo"
         >
 
-        <button class="mobile-menu-close" type="button" aria-label="Close navigation">
+        <button
+          class="mobile-menu-close"
+          type="button"
+          aria-label="Close navigation"
+          onclick="document.body.classList.remove('nav-open')"
+        >
           ×
         </button>
       </div>
 
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="#about">Welcome</a>
-        <a href="#treatments">Treatments</a>
-        <a href="#prices">Prices</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#contact">Contact</a>
+        <a href="#about" onclick="document.body.classList.remove('nav-open')">Welcome</a>
+        <a href="#treatments" onclick="document.body.classList.remove('nav-open')">Treatments</a>
+        <a href="#prices" onclick="document.body.classList.remove('nav-open')">Prices</a>
+        <a href="#reviews" onclick="document.body.classList.remove('nav-open')">Reviews</a>
+        <a href="#contact" onclick="document.body.classList.remove('nav-open')">Contact</a>
       </nav>
 
       <a href="tel:01612720430" class="header-button">
@@ -51,54 +64,3 @@
 
   </div>
 </header>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const navToggle = document.querySelector(".mobile-nav-toggle");
-    const headerRight = document.querySelector(".header-right");
-    const navOverlay = document.querySelector(".mobile-nav-overlay");
-    const navClose = document.querySelector(".mobile-menu-close");
-
-    if (!navToggle || !headerRight || !navOverlay) return;
-
-    function openMenu() {
-      document.body.classList.add("nav-open");
-      navToggle.classList.add("is-open");
-      headerRight.classList.add("is-open");
-      navOverlay.classList.add("is-visible");
-      navToggle.setAttribute("aria-expanded", "true");
-      headerRight.setAttribute("aria-hidden", "false");
-    }
-
-    function closeMenu() {
-      document.body.classList.remove("nav-open");
-      navToggle.classList.remove("is-open");
-      headerRight.classList.remove("is-open");
-      navOverlay.classList.remove("is-visible");
-      navToggle.setAttribute("aria-expanded", "false");
-      headerRight.setAttribute("aria-hidden", "true");
-    }
-
-    navToggle.addEventListener("click", function () {
-      if (document.body.classList.contains("nav-open")) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    navOverlay.addEventListener("click", closeMenu);
-
-    if (navClose) {
-      navClose.addEventListener("click", closeMenu);
-    }
-
-    document.querySelectorAll(".site-nav a, .header-button, .mobile-menu-phone").forEach(function (link) {
-      link.addEventListener("click", closeMenu);
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") closeMenu();
-    });
-  });
-</script>
