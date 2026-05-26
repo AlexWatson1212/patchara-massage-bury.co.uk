@@ -1,14 +1,9 @@
 <!-- _includes/header.html -->
 
 <header class="site-header">
-
   <div class="container header-inner">
 
-    <a
-      href="{{ '/' | relative_url }}"
-      class="site-logo"
-      aria-label="Patchara Thai Massage home"
-    >
+    <a href="{{ '/' | relative_url }}" class="site-logo" aria-label="Patchara Thai Massage home">
       <img
         src="{{ '/assets/images/logo.png' | relative_url }}"
         alt="Patchara Thai Massage"
@@ -16,20 +11,26 @@
       >
     </a>
 
-    <button
-      class="mobile-nav-toggle"
-      type="button"
-      aria-label="Toggle navigation"
-      aria-expanded="false"
-    >
+    <button class="mobile-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <div class="mobile-nav-overlay"></div>
+    <div class="mobile-nav-overlay" aria-hidden="true"></div>
 
-    <div class="header-right">
+    <div class="header-right" aria-hidden="true">
+      <div class="mobile-menu-head">
+        <img
+          src="{{ '/assets/images/logo.png' | relative_url }}"
+          alt="Patchara Thai Massage"
+          class="mobile-menu-logo"
+        >
+
+        <button class="mobile-menu-close" type="button" aria-label="Close navigation">
+          ×
+        </button>
+      </div>
 
       <nav class="site-nav" aria-label="Main navigation">
         <a href="#about">Welcome</a>
@@ -43,25 +44,29 @@
         Book now
       </a>
 
+      <a href="tel:01612720430" class="mobile-menu-phone">
+        0161 272 0430
+      </a>
     </div>
 
   </div>
-
 </header>
 
 <script>
   const navToggle = document.querySelector(".mobile-nav-toggle");
   const headerRight = document.querySelector(".header-right");
   const navOverlay = document.querySelector(".mobile-nav-overlay");
+  const navClose = document.querySelector(".mobile-menu-close");
 
-  if (navToggle && headerRight) {
-
+  if (navToggle && headerRight && navOverlay) {
     function closeMenu() {
       headerRight.classList.remove("is-open");
       navToggle.classList.remove("is-open");
       navOverlay.classList.remove("is-visible");
       document.body.classList.remove("nav-open");
       navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open navigation");
+      headerRight.setAttribute("aria-hidden", "true");
     }
 
     function openMenu() {
@@ -70,28 +75,30 @@
       navOverlay.classList.add("is-visible");
       document.body.classList.add("nav-open");
       navToggle.setAttribute("aria-expanded", "true");
+      navToggle.setAttribute("aria-label", "Close navigation");
+      headerRight.setAttribute("aria-hidden", "false");
     }
 
     navToggle.addEventListener("click", () => {
-      const isOpen = headerRight.classList.contains("is-open");
-
-      if (isOpen) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
+      headerRight.classList.contains("is-open") ? closeMenu() : openMenu();
     });
 
     navOverlay.addEventListener("click", closeMenu);
 
-    document.querySelectorAll(".site-nav a").forEach((link) => {
+    if (navClose) {
+      navClose.addEventListener("click", closeMenu);
+    }
+
+    document.querySelectorAll(".site-nav a, .header-button").forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
 
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 760) {
-        closeMenu();
-      }
+      if (window.innerWidth > 760) closeMenu();
     });
   }
 </script>

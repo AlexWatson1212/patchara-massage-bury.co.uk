@@ -298,6 +298,50 @@ description: Professional Thai massage in Heap Bridge, Bury. Traditional Thai ma
 </main>
 
 <script>
+
+  const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
+  const mobileNavPanel = document.querySelector(".header-right");
+  const mobileNavOverlay = document.querySelector(".mobile-nav-overlay");
+  const mobileNavLinks = document.querySelectorAll(".site-nav a, .header-button");
+
+  function setMobileNav(open) {
+    if (!mobileNavToggle || !mobileNavPanel || !mobileNavOverlay) return;
+
+    document.body.classList.toggle("nav-open", open);
+    mobileNavToggle.classList.toggle("is-open", open);
+    mobileNavPanel.classList.toggle("is-open", open);
+    mobileNavOverlay.classList.toggle("is-visible", open);
+
+    mobileNavToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  if (mobileNavToggle && mobileNavPanel && mobileNavOverlay) {
+    mobileNavToggle.setAttribute("aria-expanded", "false");
+    mobileNavToggle.setAttribute("aria-label", "Open menu");
+
+    mobileNavToggle.addEventListener("click", () => {
+      const isOpen = mobileNavToggle.classList.contains("is-open");
+      setMobileNav(!isOpen);
+    });
+
+    mobileNavOverlay.addEventListener("click", () => {
+      setMobileNav(false);
+    });
+
+    mobileNavLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        setMobileNav(false);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMobileNav(false);
+      }
+    });
+  }
+
+
   const reviewCards = document.querySelectorAll(".review-card");
   const nextReview = document.querySelector(".review-arrow-next");
   const prevReview = document.querySelector(".review-arrow-prev");
